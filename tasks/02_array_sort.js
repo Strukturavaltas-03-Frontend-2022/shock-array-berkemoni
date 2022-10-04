@@ -33,7 +33,7 @@ function getSortedNamesArray(names = ['Ali', 'Géza', 'Botond']) {
  * @desc Ha segítség kell, nézd meg a példafüggvényt feljebb.
  */
 const sortFood = (food = ['milk', 'bread', 'apple']) => {
-    return;
+    return food.sort();
 }
 
 /**
@@ -44,7 +44,7 @@ const sortFood = (food = ['milk', 'bread', 'apple']) => {
  * @returns {string[]} - a string alapján rendezett tömb.
  */
 const sortNames = (names = ['Bill', 'Anna']) => {
-    // 
+    return names.sort();
 }
 
 /**
@@ -57,8 +57,8 @@ const sortNames = (names = ['Bill', 'Anna']) => {
  * egy callback függvényt használunk.  
  * Példa a callback függvényre: (a, b) => a - b
  */
-const sortVariousNumbers = (prices=[121, 41, 56, 1245]) => {
-    return prices.sort();
+const sortVariousNumbers = (prices = [121, 41, 56, 1245]) => {
+    return prices.sort((a, b) => a - b);
 }
 
 /**
@@ -72,9 +72,8 @@ const sortVariousNumbers = (prices=[121, 41, 56, 1245]) => {
  * @desc most visszafelé kell rendezni, csökkenő sorrendbe.
  */
 const sortVariousNumbersDesc = (prices = [121, 41, 56, 1245]) => {
-    // 
+    return prices.sort((a, b) => b - a);
 }
-
 /**
  * 5. feladat
  * @todo Pótold a hiányzó részeket!
@@ -87,9 +86,8 @@ const sortVariousNumbersDesc = (prices = [121, 41, 56, 1245]) => {
  * Példa callbackre: (string1, string2) => string1.localeCompare(string2)
  */
 const sortInternationalNames = (names = ['Árpád', 'Beáta', 'Örs', 'Zoltán']) => {
-    // 
+    return names.sort((name1, name2) => name1.localeCompare(name2));
 }
-
 /**
  * 6. feladat
  * @todo Pótold a hiányzó részeket!
@@ -100,8 +98,8 @@ const sortInternationalNames = (names = ['Árpád', 'Beáta', 'Örs', 'Zoltán']
  * @desc ez hasonló mint az előző, csak nem a string1.localeCompare(string2),  
  * hanem valami ilyesmi kell: user1.name.localeCompare(user2.name)
  */
-const sortInternationalUsers = (users = [{name: 'Ákos', age: 44, city: 'Bp'}]) => {
-    // 
+const sortInternationalUsers = (users = [{ name: 'Ákos', age: 44, city: 'Bp' }]) => {
+    return users.sort((user1, user2) => user1.name.localeCompare(user2.name));
 }
 
 /**
@@ -114,6 +112,9 @@ const sortInternationalUsers = (users = [{name: 'Ákos', age: 44, city: 'Bp'}]) 
  * @returns {[Object]} - a városok alapján rendezett users tömb.
  * @desc EXPORTÁLD A FÜGGVÉNYT!
  */
+const sortInternationalUsersByCity = (users = [{ name: 'Ákos', age: 44, city: 'Bp' }]) => {
+    return users.sort((user1, user2) => user1.city.localeCompare(user2.city));
+}
 
 /**
  * 8. feladat
@@ -126,10 +127,17 @@ const sortInternationalUsers = (users = [{name: 'Ákos', age: 44, city: 'Bp'}]) 
  * @returns {[Object]} - az életkor alapján CSÖKKENŐ sorrendbe rendezett users tömb.
  * @desc EXPORTÁLD A FÜGGVÉNYT!
  */
-
-
-
-
+const sortInternationalUsersByAgeDesc = (users = [{ name: 'Ákos', age: 44, city: 'Bp' }]) => {
+    return users.sort((user1, user2) => user2.age - user1.age);
+}
+const users = [
+    { name: 'Ármin', age: 44, city: 'Bp' },
+    { name: 'Katalin', age: 55, city: 'Kecskemét' },
+    { name: 'Szófia', age: 22, city: 'Ágasegyháza' },
+    { name: 'Örs', age: 9, city: 'Ózd' },
+    { name: 'János', age: 67, city: 'Arad' },
+];
+sortInternationalUsersByAgeDesc(users);
 
 export {
     sortFood,
@@ -138,6 +146,6 @@ export {
     sortVariousNumbersDesc,
     sortInternationalNames,
     sortInternationalUsers,
-
-
+    sortInternationalUsersByCity,
+    sortInternationalUsersByAgeDesc
 }

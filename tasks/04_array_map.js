@@ -18,8 +18,8 @@
  * FONTOS: az eredeti tömb, tehát a names az nem fog megváltozni!
  * @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
  */
- function addNamePrefix(names = ['Ali', 'Géza', 'Botond']) {
-    return names.map( name => `Dear ${name}!` );
+function addNamePrefix(names = ['Ali', 'Géza', 'Botond']) {
+    return names.map(name => `Dear ${name}!`);
 }
 
 /**
@@ -42,10 +42,10 @@
  * karaktert amit nagybetűssé alakítottunk, majd a maradékot összefűztük vele.
  */
 const transformTitleCase = (foods = ['milk', 'bread', 'apple']) => {
-    // 
+    return foods.map(food => (food[0].toUpperCase() + food.slice(1)));
 }
 
-/**
+/*
  * 2. feladat
  * @todo Pótold a hiányzó részeket!
  * @summary ArrowFunctionExpression, kiegészíti a vezetékneveket a nemnek  
@@ -58,8 +58,17 @@ const transformTitleCase = (foods = ['milk', 'bread', 'apple']) => {
  * A módosításnál először ellenőrzöd a nemet, és utána beállítod a neki  
  * megfelelő prefixumot.
  */
-const addNamePrefixToStudents = (students = [{lastName: 'Doe', gender: 'male'}]) => {
-    // 
+
+const addNamePrefixToStudents = (students = [{ lastName: 'Doe', gender: 'male' }]) => {
+    const studentsPrefix = students.map(student => {
+        if (student.gender == 'male') {
+            return { ...student, lastName: `Mr. ${student.lastName}` }
+        }
+        else {
+            return { ...student, lastName: `Ms. ${student.lastName}` }
+        }
+    })
+    return studentsPrefix;
 }
 
 /**
@@ -72,7 +81,9 @@ const addNamePrefixToStudents = (students = [{lastName: 'Doe', gender: 'male'}])
  * @returns {number[]} - az árak 1.3-szorosa.
  * @desc EXPORTÁLD A FÜGGVÉNYT!
  */
-
+const getSellPrices = (prices = [75, 80, 56, 1245]) => {
+    return prices.map(price => price * 1.3);
+}
 
 
 /**
@@ -82,71 +93,84 @@ const addNamePrefixToStudents = (students = [{lastName: 'Doe', gender: 'male'}])
  * teljes neve és viszgaeredménye található. 
  * Függvény neve: getStudentReports
  * @param {[Object]} [students=[{firstName: 'John', lastName: 'Doe', points: 20}]] students.
- * @returns {string[]} - eredmény `<firstName> <lastName>, points: <points>.`  
- * formátumban.
- * @desc vigyázz, objektumokat kapsz, de string-eket kell visszaadnod.
- * Template-literallal dolgozz.
- * EXPORTÁLD A FÜGGVÉNYT!
- */
-
+ * @returns {string[]} - eredmény `< firstName > <lastName>, points: <points>.`
+            * formátumban.
+            * @desc vigyázz, objektumokat kapsz, de string-eket kell visszaadnod.
+            * Template-literallal dolgozz.
+            * EXPORTÁLD A FÜGGVÉNYT!
+            */
+const getStudentReports = (students = [{ firstName: 'John', lastName: 'Doe', points: 20 }]) => {
+    return students.map(student => `${student.firstName} ${student.lastName}, points: ${student.points}.`)
+};
 
 
 /**
  * 5. feladat
  * @todo Pótold a hiányzó részeket!
- * @summary ArrowFunctionExpression, visszaad egy új tömböt, amiben az egyes  
- * objektumok ki vannak egészítve azzal, hogy sikeres volt-e a vizsga?  
- * Az új tulajdonság neve: result, 
+ * @summary ArrowFunctionExpression, visszaad egy új tömböt, amiben az egyes
+ * objektumok ki vannak egészítve azzal, hogy sikeres volt-e a vizsga?
+ * Az új tulajdonság neve: result,
  * értéke: ha több mint 50 pontja van `passing`, különben `not passing`.
  * Függvény neve: addStudentReports
  * @param {[Object]} [students=[{firstName: 'John', points: 20}]] students.
- * @returns {Object[]} - student objektumok kiegészítve a result tulajdonsággal.
- * @desc két lépés, először hozzáadod a result tulajdonságot, utána visszaadod.
- * Ha bátor vagy és egy sorban akarod megoldani (nem muszály): 
- * ({...student, result: student.points > 50 ? 'passing' : 'not passing'})
- * EXPORTÁLD A FÜGGVÉNYT!
- */
-
+            * @returns {Object[]} - student objektumok kiegészítve a result tulajdonsággal.
+            * @desc két lépés, először hozzáadod a result tulajdonságot, utána visszaadod.
+            * Ha bátor vagy és egy sorban akarod megoldani (nem muszály):
+            * ({...student, result: student.points > 50 ? 'passing' : 'not passing'})
+            * EXPORTÁLD A FÜGGVÉNYT!
+            */
+const addStudentReports = (students = [{ firstName: 'John', points: 20 }]) => {
+    return students.map(student => ({ ...student, result: student.points > 50 ? 'passing' : 'not passing' }))
+};
 
 
 /**
  * 6. feladat
  * @todo Pótold a hiányzó részeket!
- * @summary ArrowFunctionExpression, employee objektumok új tömbjét adja vissza,  
- * kiegészítve a teljes bevételükkel.  
+ * @summary ArrowFunctionExpression, employee objektumok új tömbjét adja vissza,
+ * kiegészítve a teljes bevételükkel.
  * A tulajdonság neve: income
- * Értéke: (fizetés plusz prémium) növelve a korrekcióval.  
+ * Értéke: (fizetés plusz prémium) növelve a korrekcióval.
  * Ha a korrekció 0.3, az azt jelenti, hogy az összeg az 1.3-szorosára módosul.
  * A függvény neve: addCorrectedIncome
- * @param {[Object]} [employees=[{name: 'Bob', salary: 200000, premium: 1000, corr: 0.2}]]  
- * employees
- * @returns {[Object]} - az income-al kiegészített employee objektumok tömbje.
- * @desc EXPORTÁLD A FÜGGVÉNYT!
- */
-
+ * @param {[Object]} [employees=[{name: 'Bob', salary: 200000, premium: 1000, corr: 0.2}]]
+            * employees
+            * @returns {[Object]} - az income-al kiegészített employee objektumok tömbje.
+            * @desc EXPORTÁLD A FÜGGVÉNYT!
+            */
+const addCorrectedIncome = (employees = [{ name: 'Bob', salary: 200000, premium: 1000, corr: 0.2 }]) => {
+    return employees.map(employee => ({ ...employee, income: (employee.salary + employee.premium) * (1 + employee.corr) }))
+}
 
 
 /**
  * 7. feladat
  * @todo Pótold a hiányzó részeket!
- * @summary ArrowFunctionExpression, visszaadja a fogásokat az árukkal kiegészítve.  
- * Csak a számot kalkuláljuk ki, a pénznemet elhanyagoljuk.   
+ * @summary ArrowFunctionExpression, visszaadja a fogásokat az árukkal kiegészítve.
+ * Csak a számot kalkuláljuk ki, a pénznemet elhanyagoljuk.
  * Tulajdonság neve: price
  * Értéke attól függ, hogy milyen típusú ételről van szó?
- * Desszertek esetén: minden desszert 200, de kalóriánként 1.5-el olcsóbb.  
+ * Desszertek esetén: minden desszert 200, de kalóriánként 1.5-el olcsóbb.
  * Azaz, egy 50 kalóriás desszert 125-be kerül, mert 50 * 1.5-öt levonunk a 200-ból.
  * Egyéb ételek esetén: alapból 25 az értéke, és minden kalóriával 1-el drágul.
  * FONTOS: kerekítsd matematikai függvénnyel az price-ot.
  * A függvény neve: addDishPrices
  * @param {[Object]} [dishes=[{id: 1, kcal: 101, type: 'dessert'}]]  dishes
- * @returns {[Object]} - a fogások tömbje az árukkal kiegészítve.
- * @desc neked a `kcal` és `type` kulcsokat kell vizsgálnod.
- * EXPORTÁLD A FÜGGVÉNYT!
- */
-
+            * @returns {[Object]} - a fogások tömbje az árukkal kiegészítve.
+            * @desc neked a `kcal` és `type` kulcsokat kell vizsgálnod.
+            * EXPORTÁLD A FÜGGVÉNYT!
+            */
+const addDishPrices = (dishes = [{ id: 1, kcal: 101, type: 'dessert' }]) => {
+    return dishes.map(dish => ({ ...dish, price: Math.round(dish.type === 'dessert' ? (200 - 1.5 * dish.kcal) : (25 + dish.kcal)) }))
+}
 
 
 export {
     transformTitleCase,
     addNamePrefixToStudents,
+    getSellPrices,
+    getStudentReports,
+    addStudentReports,
+    addCorrectedIncome,
+    addDishPrices,
 }
